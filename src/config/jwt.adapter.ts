@@ -15,6 +15,12 @@ export class JwtAdapter {
   }
 
   static validateToken(token: string) {
-    throw new Error("Method not implemented.");
+    return new Promise((resolve) => {
+      jwt.verify(token, JWT_SEED, (error, decoded) => {
+        if (error) return resolve(null);
+
+        return resolve(decoded);
+      });
+    });
   }
 }
